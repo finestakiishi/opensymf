@@ -12,19 +12,19 @@ Seven speakers converted across the house, all running [piCorePlayer](https://ww
 |-----|---------|---------|------------------|--------|
 | 4×  | IKEA SYMFONISK Bookshelf (Gen 2) | IQaudIO DigiAMP+ SC0370 | Buttons + LEDs | ✅ Complete |
 | 2×  | IKEA SYMFONISK Picture Frame | IQaudIO DigiAMP+ SC0370 | Audio only | ⚠️ Partial |
-| 1×  | Sonos Play:5 (Gen 1) | HiFiBerry DAC+/AMP | N/A | ✅ Complete |
+| 1×  | Sonos Play:5 (Gen 1) | HiFiBerry DAC+ | N/A (line-in) | ✅ Complete |
 
 All speakers run on a **Raspberry Pi Zero 2 WH** (pre-soldered header variant).
 
 ## Why?
 
-Sonos [ended support](https://en.wikipedia.org/wiki/Sonos#End-of-life_controversy) for older speakers including the Play:5 Gen 1, effectively bricking functional hardware. IKEA SYMFONISK speakers, being Sonos-based internally, face the same fate. This project replaces the proprietary brains while keeping the original power supplies, speaker drivers, buttons, and LEDs intact.
+Sonos [ended support](https://en.wikipedia.org/wiki/Sonos#End-of-life_controversy) for older speakers including the Play:5 Gen 1, effectively stranding them on a frozen S1 platform with no future updates or integration with newer devices. IKEA SYMFONISK speakers, being Sonos-based internally, face the same fate. This project replaces the proprietary brains while keeping the original power supplies, speaker drivers, buttons, and LEDs intact.
 
 ## Two Conversion Approaches
 
 **SYMFONISK speakers** → The original Sonos board handles everything (DAC + amplification), so the **IQaudIO DigiAMP+** replaces both functions and drives the passive speaker drivers directly through its screw terminals.
 
-**Sonos Play:5 Gen 1** → Already has five Class-D amplifiers and six drivers built in. Only needs a **HiFiBerry DAC+/AMP** to feed audio into the original amplification stage. Why throw away perfectly good hardware?
+**Sonos Play:5 Gen 1** → Already has five Class-D amplifiers, six drivers, and a line-in jack. A **RPi Zero + HiFiBerry DAC+** plugged into the line-in was all it needed — the original board is still inside, completely untouched.
 
 For full hardware details and ALSA configuration, see [docs/HARDWARE.md](docs/HARDWARE.md).
 
