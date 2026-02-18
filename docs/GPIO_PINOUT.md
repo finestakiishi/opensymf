@@ -77,4 +77,17 @@ The picture frame model uses the same DigiAMP+ setup for audio, but the front pa
 
 ## Photos
 
-See `docs/images/` for photos of the PCB board showing the labeled test points.
+### GPIO prototyping workbench
+
+![GPIO prototyping workbench](images/gpio-prototyping-workbench.jpg)
+*Mapping the SYMFONISK front panel: gutted speaker shell with DigiAMP+ and driver (left), FPC ribbon cable to breakout board on breadboard (center), original button panel (right)*
+
+### Front panel PCB — close-up
+
+![FPC board close-up](images/fpc-board-close-up.jpg)
+*WOW B NFC/KEY BOARD P0.3 — labeled test points for each LED (WHITE, AMB, RED, GRN), button (VOL+, VOL-, PLAY), and bus signals (GND, SCL, SDA, NFC_FD). The silver square (top left) is the NFC antenna pad.*
+
+### Front panel PCB — overview
+
+![FPC board overview](images/fpc-board-overview.jpg)
+*Same board, wider angle showing the 16-pin FPC ribbon cable connector*
